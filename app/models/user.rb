@@ -55,6 +55,9 @@ class User < ApplicationRecord
                              if: -> { greenlight_account? && Rails.configuration.terms },
                              unless: -> { @bypass_terms_acceptance }
 
+
+  validate :provider_cannot_be_changed, on: :update
+
   # We don't want to require password validations on all accounts.
   has_secure_password(validations: false)
 
@@ -295,4 +298,14 @@ class User < ApplicationRecord
   def role_provider
     Rails.configuration.loadbalanced_configuration ? provider : "greenlight"
   end
+
+  # Provider will be reset if changed via browser
+  def provider_cannot_be_changed
+    if provider_changed?
+      self.provider = provider_was
+      errors.add(:provider, I18n.t("errors.messages.invalid"))
+    end
+  end
+
+
 end

@@ -1,0 +1,13 @@
+current directory: /home/samuel/blindside/greenlight/vendor/bundle/ruby/2.7.0/gems/json-2.5.1/ext/json
+/home/samuel/.rbenv/versions/2.7.2/bin/ruby -I /home/samuel/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20220301-250136-ojdz0f.rb extconf.rb
+creating Makefile
+
+current directory: /home/samuel/blindside/greenlight/vendor/bundle/ruby/2.7.0/gems/json-2.5.1/ext/json
+make "DESTDIR=" clean
+
+current directory: /home/samuel/blindside/greenlight/vendor/bundle/ruby/2.7.0/gems/json-2.5.1/ext/json
+make "DESTDIR="
+make: Nothing to be done for 'all'.
+
+current directory: /home/samuel/blindside/greenlight/vendor/bundle/ruby/2.7.0/gems/json-2.5.1/ext/json
+make "DESTDIR=" install

@@ -8,7 +8,7 @@ export function FormControl({ field, ...props }) {
   const { id, validations } = hookForm;
   const error = errors[id];
   return (
-    <BootStrapForm.Group controlId={field.controlId}>
+    <BootStrapForm.Group className="mb-2" controlId={field.controlId}>
       <BootStrapForm.Label>
         {field.label}
       </BootStrapForm.Label>

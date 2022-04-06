@@ -19,11 +19,11 @@ export default function SignIn() {
   return (
     <>
       <FormLogo />
-      <Card className="col-md-4 mx-auto p-4 border-0 shadow-sm user-forms">
+      <Card className="col-md-4 mx-auto p-4 border-0 shadow-sm">
         <Card.Title className="text-center pb-2"> Sign In </Card.Title>
         <Form onSubmit={handleSubmit(handleSignIn)} noValidate>
           <Form.Group className="mb-2" controlId="signInEmail">
-            <Form.Label>Email</Form.Label>
+            <Form.Label className="small mb-0">Email</Form.Label>
             <Form.Control
               type="email"
               placeholder="Email"
@@ -34,7 +34,7 @@ export default function SignIn() {
             </Form.Text>
           </Form.Group>
           <Form.Group className="mb-2" controlId="signInPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label className="small mb-0">Password</Form.Label>
             <Form.Control
               type="password"
               placeholder="Password"
@@ -47,16 +47,16 @@ export default function SignIn() {
           <Row>
             <Col>
               <Form.Group className="mb-2" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Remember me" />
+                <Form.Check type="checkbox" label="Remember me" className="small" />
               </Form.Group>
             </Col>
             <Col>
-              <Link to="" className="text-link float-end"> Forgot password? </Link>
+              <Link to="" className="text-link float-end small"> Forgot password? </Link>
             </Col>
           </Row>
           <Button className="w-100 my-3 py-2" type="submit" variant="primary">Sign In</Button>
         </Form>
-        <span className="text-center text-muted"> Don't have an account?
+        <span className="text-center text-muted small"> Don't have an account?
          <Link to="/signup" className="text-link"> Sign up </Link>
         </span>
       </Card>

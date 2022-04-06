@@ -9,7 +9,7 @@ export function FormControl({ field, ...props }) {
   const error = errors[id];
   return (
     <BootStrapForm.Group className="mb-2" controlId={field.controlId}>
-      <BootStrapForm.Label>
+      <BootStrapForm.Label className="small mb-0">
         {field.label}
       </BootStrapForm.Label>
       <BootStrapForm.Control {...props} placeholder={field.placeHolder} isInvalid={error} {...register(id, validations)} />

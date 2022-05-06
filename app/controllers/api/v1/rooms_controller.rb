@@ -4,7 +4,7 @@ module Api
   module V1
     class RoomsController < ApplicationController
       skip_before_action :verify_authenticity_token # TODO: amir - Revisit this.
-      before_action :find_room, only: %i[show start recordings]
+      before_action :find_room, only: %i[show start recordings shared_access shared_users shareable_users]
 
       # GET /api/v1/rooms.json
       # Returns: { data: Array[serializable objects(rooms)] , errors: Array[String] }
@@ -63,6 +63,58 @@ module Api
       # Does: gets the recordings that belong to the specific room friendly_id
       def recordings
         render_json(data: @room.recordings, status: :ok, include: :formats)
+      end
+
+      # POST /api/v1/rooms/friendly_id/shared_access
+      def shared_access
+        shared_users = User.where(id: params[:shared_access_users])
+
+        shared_users.each do |shared_user|
+          SharedAccess.where(user_id: shared_user.id, room_id: @room.id).first_or_create
+        end
+
+        render_json status: :ok
+      end
+
+      # GET /api/v1/rooms/friendly_id/shared_users.json
+      def shared_users
+        shared_users = []
+
+        User.joins(:shared_rooms).each do |user|
+          shared_users << user if user.shared_rooms.pluck(:friendly_id).include?(@room.friendly_id)
+        end
+
+        shared_users.map! do |user|
+          {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            avatar: user_avatar(user)
+          }
+        end
+
+        render_json data: shared_users, status: :ok
+      end
+
+      def shareable_users
+        shareable_users = []
+
+        User.all.each do |user|
+          unless user.rooms.pluck(:friendly_id).include?(@room.friendly_id) || user.shared_rooms.pluck(:friendly_id).include?(@room.friendly_id)
+            shareable_users << user
+          end
+        end
+
+        shareable_users.map! do |user|
+          {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            avatar: user_avatar(user)
+          }
+        end
+
+        render_json data: shareable_users, status: :ok
       end
 
       private

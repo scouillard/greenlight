@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  before_action do
-    # Unless the request format is explicitly json Rails will mitigate the responsability to CSR to handle it.
-    render 'components/index' unless valid_api_request?
-  end
+  # before_action do
+  #   # Unless the request format is explicitly json Rails will mitigate the responsability to CSR to handle it.
+  #   render 'components/index' unless valid_api_request?
+  # end
 
   # For requests that raised an unkown exception.
   # Note: The order of each rescue is important (The highest has the lowest priority).
@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
   # Returns the current signed in User (if any)
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
+  end
+
+  def user_avatar(user)
+    user.avatar.attached? ? url_for(user.avatar) : ActionController::Base.helpers.image_path('default-avatar.png')
   end
 
   def render_json(data: {}, errors: [], status: :ok, include: nil)

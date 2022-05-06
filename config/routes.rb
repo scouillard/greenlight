@@ -11,7 +11,7 @@ Rails.application.routes.draw do
           delete 'signout', to: 'sessions#destroy'
         end
       end
-      resources :users, only: %i[create update destroy] do
+      resources :users, only: %i[index create update destroy] do
         member do
           delete :purge_avatar
         end
@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       resources :rooms, only: %i[show index create destroy], param: :friendly_id do
         member do
           post '/start', to: 'rooms#start', as: :start_meeting
+          post '/shared_access', to: 'rooms#shared_access'
+          get '/shared_users', to: 'rooms#shared_users'
+          get '/shareable_users', to: 'rooms#shareable_users'
           get '/recordings', to: 'rooms#recordings'
         end
       end

@@ -70,7 +70,7 @@ module Api
         shared_users = User.where(id: params[:shared_access_users])
 
         shared_users.each do |shared_user|
-          SharedAccess.where(user_id: shared_user.id, room_id: @room.id).first_or_create
+          SharedAccess.find_or_create_by!(user_id: shared_user.id, room_id: @room.id)
         end
 
         render_json status: :ok

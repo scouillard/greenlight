@@ -22,6 +22,7 @@ Rails.application.routes.draw do
           post '/shared_access', to: 'rooms#shared_access'
           get '/shared_users', to: 'rooms#shared_users'
           get '/shareable_users', to: 'rooms#shareable_users'
+          post '/delete_shared_access', to: 'rooms#delete_shared_access'
           get '/recordings', to: 'rooms#recordings'
         end
       end

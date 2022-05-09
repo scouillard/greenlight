@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Card, Col, Row, Stack } from 'react-bootstrap';
 import Modal from '../shared/Modal';
 import SharedAccessForm from '../forms/SharedAccessForm';
+import DeleteSharedAccessForm from '../forms/DeleteSharedAccessForm';
 import Avatar from '../users/Avatar';
 import SearchBar from '../shared/SearchBar';
 
@@ -47,6 +48,7 @@ export default function SharedAccessList({ users }) {
                   </Col>
                   <Col className="my-auto">
                     <span className="text-muted"> {user.email} </span>
+                    <DeleteSharedAccessForm userId={user.id} />
                   </Col>
                 </Row>
               ))

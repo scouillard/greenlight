@@ -4,7 +4,7 @@ module Api
   module V1
     class RoomsController < ApplicationController
       skip_before_action :verify_authenticity_token # TODO: amir - Revisit this.
-      before_action :find_room, only: %i[show start recordings shared_access shared_users shareable_users]
+      before_action :find_room, only: %i[show start recordings shared_access shared_users shareable_users delete_shared_access]
 
       # GET /api/v1/rooms.json
       # Returns: { data: Array[serializable objects(rooms)] , errors: Array[String] }
@@ -117,6 +117,16 @@ module Api
         render_json data: shareable_users, status: :ok
       end
 
+      def delete_shared_access
+        room = Room.find_by(friendly_id: params[:friendly_id])
+        user = User.find_by(id: params[:user_id])
+
+        SharedAccess.where(user_id: user.id, room_id: room.id).delete_all
+
+        render_json status: :ok
+      end
+
+
       private
 
       def find_room
@@ -124,7 +134,7 @@ module Api
       end
 
       def room_params
-        params.require(:room).permit(:name)
+        params.require(:room).permit(:name, :user_id)
       end
     end
   end

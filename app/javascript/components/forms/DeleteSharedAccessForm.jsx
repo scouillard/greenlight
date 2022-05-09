@@ -13,7 +13,7 @@ export default function DeleteSharedAccessForm({userId}) {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} className="float-end pe-2">
-      <input value={userId} {...register('user_id')} />
+      <input value={userId} type="hidden" {...register('user_id')} />
       <Button variant="font-awesome" type="submit">
         <FontAwesomeIcon icon={faTrashAlt} />
       </Button>

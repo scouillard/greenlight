@@ -22,6 +22,14 @@ class User < ApplicationRecord
   # TODO: samuel - ActiveStorage validations needs to be discussed and implemented.
   validate :avatar_validation
 
+  def room_owner?(room)
+    id == room.user_id
+  end
+
+  def room_shared?(room)
+    shared_rooms.pluck(:friendly_id).include?(room.friendly_id)
+  end
+
   private
 
   def avatar_validation

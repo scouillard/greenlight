@@ -80,8 +80,9 @@ module Api
       def shared_users
         shared_users = []
 
+        # User is added to the shared_user list if the room is shared to the user and it is not already included in shared_user
         User.joins(:shared_rooms).each do |user|
-          shared_users << user if user.shared_rooms.pluck(:friendly_id).include?(@room.friendly_id)
+          shared_users << user if user.room_shared?(@room) && shared_users.exclude?(user)
         end
 
         shared_users.map! do |user|
@@ -99,10 +100,9 @@ module Api
       def shareable_users
         shareable_users = []
 
+        # User is added to the shareable_user list unless it's the room owner or the room is already shared to the user
         User.all.each do |user|
-          unless user.rooms.pluck(:friendly_id).include?(@room.friendly_id) || user.shared_rooms.pluck(:friendly_id).include?(@room.friendly_id)
-            shareable_users << user
-          end
+          shareable_users << user unless user.room_owner?(@room) || user.room_shared?(@room)
         end
 
         shareable_users.map! do |user|

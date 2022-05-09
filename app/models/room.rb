@@ -16,13 +16,6 @@ class Room < ApplicationRecord
   before_validation :set_friendly_id, :set_meeting_id, on: :create
   after_create :set_meeting_passwords!
 
-  def owned_by?(user)
-    user_id = user&.id
-  end
-
-  def shared_user
-  end
-
   private
 
   def set_friendly_id

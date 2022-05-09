@@ -5,8 +5,7 @@ export default function useDeleteSharedAccess(friendlyId) {
   const queryClient = useQueryClient();
 
   const deleteSharedAccess = (data) => {
-    console.log(data);
-    axios.post(`/api/v1/rooms/${friendlyId}/delete_shared_access.json`, data);
+    axios.delete(`/api/v1/rooms/${friendlyId}/unshare_room_access.json`, { data });
   };
 
   const delay = (time) => new Promise((resolve) => {

@@ -111,4 +111,52 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       expect(recording_ids).to be_empty
     end
   end
+
+  describe '#share_room_access' do
+    it 'shares a room with a user' do
+      room = create(:room)
+      post :share_room_access, params: { friendly_id: room.friendly_id, shared_access_users: [user.id] }
+      expect(SharedAccess.exists?(user_id: user.id, room_id: room.id)).to be true
+      expect(user.shared_rooms).to include(room)
+    end
+
+    it "doesn't share a room with a user that it not selected" do
+      room = create(:room)
+      random_user = create(:user)
+      post :share_room_access, params: { friendly_id: room.friendly_id, shared_access_users: [random_user.id] }
+      expect(SharedAccess.exists?(user_id: user.id, room_id: room.id)).to be false
+      expect(user.shared_rooms).not_to include(room)
+    end
+  end
+
+  describe '#unshare_room_access' do
+    it 'unshares a room with a user' do
+      room = create(:room)
+      SharedAccess.create(user_id: user.id, room_id: room.id)
+      delete :unshare_room_access, params: { friendly_id: room.friendly_id, user_id: user.id, room_id: room.id}
+      expect(SharedAccess.exists?(user_id: user.id, room_id: room.id)).to be false
+      expect(user.shared_rooms).not_to include(room)
+    end
+
+    it "doesn't unshare a room with a user that is not selected" do
+      room = create(:room)
+      random_user = create(:user)
+      SharedAccess.create(user_id: user.id, room_id: room.id)
+      SharedAccess.create(user_id: random_user.id, room_id: room.id)
+      delete :unshare_room_access, params: { friendly_id: room.friendly_id, user_id: random_user.id, room_id: room.id}
+      expect(SharedAccess.exists?(user_id: user.id, room_id: room.id)).to be true
+      expect(user.shared_rooms).to include(room)
+    end
+  end
+
+  # TODO: create list of users instead of a single user
+  describe '#shared_users' do
+    it 'lists the users that have been shared the room' do
+      room = create(:room)
+      SharedAccess.create(user_id: user.id, room_id: room.id)
+      get :shared_users, params: { friendly_id: room.friendly_id }
+      shared_user_response = JSON.parse(response.body)['data'].map { |user| user['id'] }
+      expect(shared_user_response.first).to eql(user.id)
+    end
+  end
 end

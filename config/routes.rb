@@ -19,10 +19,10 @@ Rails.application.routes.draw do
       resources :rooms, only: %i[show index create destroy], param: :friendly_id do
         member do
           post '/start', to: 'rooms#start', as: :start_meeting
-          post '/shared_access', to: 'rooms#shared_access'
+          post '/share_room_access', to: 'rooms#share_room_access'
           get '/shared_users', to: 'rooms#shared_users'
           get '/shareable_users', to: 'rooms#shareable_users'
-          post '/delete_shared_access', to: 'rooms#delete_shared_access'
+          delete '/unshare_room_access', to: 'rooms#unshare_room_access'
           get '/recordings', to: 'rooms#recordings'
         end
       end

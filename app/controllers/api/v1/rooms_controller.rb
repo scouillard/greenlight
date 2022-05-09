@@ -4,7 +4,7 @@ module Api
   module V1
     class RoomsController < ApplicationController
       skip_before_action :verify_authenticity_token # TODO: amir - Revisit this.
-      before_action :find_room, only: %i[show start recordings shared_access shared_users shareable_users delete_shared_access]
+      before_action :find_room, only: %i[show start recordings share_room_access shared_users shareable_users unshare_room_access]
 
       # GET /api/v1/rooms.json
       # Returns: { data: Array[serializable objects(rooms)] , errors: Array[String] }
@@ -65,8 +65,8 @@ module Api
         render_json(data: @room.recordings, status: :ok, include: :formats)
       end
 
-      # POST /api/v1/rooms/friendly_id/shared_access
-      def shared_access
+      # POST /api/v1/rooms/friendly_id/share_room_access
+      def share_room_access
         shared_users = User.where(id: params[:shared_access_users])
 
         shared_users.each do |shared_user|
@@ -97,6 +97,7 @@ module Api
         render_json data: shared_users, status: :ok
       end
 
+      # GET /api/v1/rooms/friendly_id/shareable_users.json
       def shareable_users
         shareable_users = []
 
@@ -117,11 +118,12 @@ module Api
         render_json data: shareable_users, status: :ok
       end
 
-      def delete_shared_access
+      # DELETE /api/v1/rooms/friendly_id/delete_share_room_access.json
+      def unshare_room_access
         room = Room.find_by(friendly_id: params[:friendly_id])
         user = User.find_by(id: params[:user_id])
 
-        SharedAccess.where(user_id: user.id, room_id: room.id).delete_all
+        SharedAccess.find_by!(user_id: user.id, room_id: room.id).delete
 
         render_json status: :ok
       end

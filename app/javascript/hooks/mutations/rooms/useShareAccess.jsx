@@ -5,8 +5,7 @@ export default function useShareAccess({ friendlyId, closeModal }) {
   const queryClient = useQueryClient();
 
   const shareAccess = (sharedAccessUsers) => {
-    console.log(sharedAccessUsers);
-    axios.post(`/api/v1/rooms/${friendlyId}/shared_access`, sharedAccessUsers);
+    axios.post(`/api/v1/rooms/${friendlyId}/share_room_access`, sharedAccessUsers);
   };
 
   const delay = (time) => new Promise((resolve) => {

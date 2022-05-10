@@ -116,7 +116,6 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
     it 'shares a room with a user' do
       room = create(:room)
       post :share_room_access, params: { friendly_id: room.friendly_id, shared_access_users: [user.id] }
-      expect(SharedAccess.exists?(user_id: user.id, room_id: room.id)).to be true
       expect(user.shared_rooms).to include(room)
     end
 
@@ -124,7 +123,12 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       room = create(:room)
       random_user = create(:user)
       post :share_room_access, params: { friendly_id: room.friendly_id, shared_access_users: [random_user.id] }
-      expect(SharedAccess.exists?(user_id: user.id, room_id: room.id)).to be false
+      expect(user.shared_rooms).not_to include(room)
+    end
+
+    it "cannot share the room to the room's owner" do
+      room = create(:room, user:)
+      post :share_room_access, params: { friendly_id: room.friendly_id, shared_access_users: [user.id] }
       expect(user.shared_rooms).not_to include(room)
     end
   end
@@ -132,31 +136,57 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
   describe '#unshare_room_access' do
     it 'unshares a room with a user' do
       room = create(:room)
-      SharedAccess.create(user_id: user.id, room_id: room.id)
+      create(:shared_access, user_id: user.id, room_id: room.id)
       delete :unshare_room_access, params: { friendly_id: room.friendly_id, user_id: user.id, room_id: room.id}
-      expect(SharedAccess.exists?(user_id: user.id, room_id: room.id)).to be false
       expect(user.shared_rooms).not_to include(room)
     end
 
     it "doesn't unshare a room with a user that is not selected" do
       room = create(:room)
       random_user = create(:user)
-      SharedAccess.create(user_id: user.id, room_id: room.id)
-      SharedAccess.create(user_id: random_user.id, room_id: room.id)
+      create(:shared_access, user_id: user.id, room_id: room.id)
+      create(:shared_access, user_id: random_user.id, room_id: room.id)
       delete :unshare_room_access, params: { friendly_id: room.friendly_id, user_id: random_user.id, room_id: room.id}
-      expect(SharedAccess.exists?(user_id: user.id, room_id: room.id)).to be true
       expect(user.shared_rooms).to include(room)
     end
   end
 
-  # TODO: create list of users instead of a single user
   describe '#shared_users' do
-    it 'lists the users that have been shared the room' do
+    it 'lists the users that the room has been shared to' do
       room = create(:room)
-      SharedAccess.create(user_id: user.id, room_id: room.id)
+      users = create_list(:user, 10)
+      shared_users = []
+
+      users[0..4].each do |user|
+        create(:shared_access, user_id: user.id, room_id: room.id)
+        shared_users << user
+      end
+
       get :shared_users, params: { friendly_id: room.friendly_id }
       shared_user_response = JSON.parse(response.body)['data'].map { |user| user['id'] }
-      expect(shared_user_response.first).to eql(user.id)
+      expect(shared_user_response).to eql(shared_users.pluck(:id))
+    end
+  end
+
+  describe '#shareable_users' do
+    it 'lists the users that the room can be shared to' do
+      room = create(:room)
+      users = create_list(:user, 10)
+      shared_users = []
+      shareable_users = []
+
+      users[0..4].each do |user|
+        create(:shared_access, user_id: user.id, room_id: room.id)
+        shared_users << user
+      end
+
+      users[5..9].each do |user|
+        shareable_users << user
+      end
+
+      get :shareable_users, params: { friendly_id: room.friendly_id }
+      shareable_user_response = JSON.parse(response.body)['data'].map { |user| user['id'] }
+      expect(shareable_user_response).to eql(shareable_users.pluck(:id))
     end
   end
 end

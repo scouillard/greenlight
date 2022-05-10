@@ -30,6 +30,11 @@ class User < ApplicationRecord
     shared_rooms.pluck(:friendly_id).include?(room.friendly_id)
   end
 
+  # If User is not the room owner, or the room is not being shared already, then the room is shareable to the user.
+  def room_shareable?(room)
+    !(room_owner?(room) || room_shared?(room))
+  end
+
   private
 
   def avatar_validation

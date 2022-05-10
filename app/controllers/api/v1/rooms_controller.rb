@@ -70,7 +70,7 @@ module Api
         shared_users = User.where(id: params[:shared_access_users])
 
         shared_users.each do |shared_user|
-          SharedAccess.find_or_create_by!(user_id: shared_user.id, room_id: @room.id)
+          SharedAccess.find_or_create_by!(user_id: shared_user.id, room_id: @room.id) if shared_user.room_shareable?(@room)
         end
 
         render_json status: :ok
@@ -103,7 +103,7 @@ module Api
 
         # User is added to the shareable_user list unless it's the room owner or the room is already shared to the user
         User.all.each do |user|
-          shareable_users << user unless user.room_owner?(@room) || user.room_shared?(@room)
+          shareable_users << user if user.room_shareable?(@room)
         end
 
         shareable_users.map! do |user|

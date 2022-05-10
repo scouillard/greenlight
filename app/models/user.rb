@@ -32,7 +32,9 @@ class User < ApplicationRecord
 
   # If User is not the room owner, or the room is not being shared already, then the room is shareable to the user.
   def room_shareable?(room)
-    !(room_owner?(room) || room_shared?(room))
+    return false if room_owner?(room) || room_shared?(room)
+
+    true
   end
 
   private

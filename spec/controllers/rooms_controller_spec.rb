@@ -172,12 +172,10 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
     it 'lists the users that the room can be shared to' do
       room = create(:room)
       users = create_list(:user, 10)
-      shared_users = []
       shareable_users = []
 
       users[0..4].each do |user|
         create(:shared_access, user_id: user.id, room_id: room.id)
-        shared_users << user
       end
 
       users[5..9].each do |user|

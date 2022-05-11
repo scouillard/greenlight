@@ -6,4 +6,3 @@ class SharedAccess < ApplicationRecord
 
   validates :shared_user, uniqueness: { scope: :shared_room }
 end
-

@@ -36,7 +36,7 @@ RSpec.describe Api::V1::SharedAccessesController, type: :controller do
       room = create(:room)
       user = create(:user)
       create(:shared_access, user_id: user.id, room_id: room.id)
-      delete :destroy, params: { room_id: room.id, user_id: user.id}
+      delete :destroy, params: { room_id: room.id, user_id: user.id }
       expect(user.shared_rooms).not_to include(room)
     end
 
@@ -46,7 +46,7 @@ RSpec.describe Api::V1::SharedAccessesController, type: :controller do
       random_user = create(:user)
       create(:shared_access, user_id: user.id, room_id: room.id)
       create(:shared_access, user_id: random_user.id, room_id: room.id)
-      delete :destroy, params: { room_id: room.id, user_id: random_user.id}
+      delete :destroy, params: { room_id: room.id, user_id: random_user.id }
       expect(user.shared_rooms).to include(room)
     end
   end

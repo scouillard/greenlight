@@ -4,8 +4,8 @@ import {
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Modal from '../shared/Modal';
-import SharedAccessForm from '../forms/SharedAccessForm';
-import DeleteSharedAccessForm from '../forms/DeleteSharedAccessForm';
+import SharedAccessForm from '../forms/shared_access_forms/SharedAccessForm';
+import DeleteSharedAccessForm from '../forms/shared_access_forms/DeleteSharedAccessForm';
 import Avatar from '../users/Avatar';
 import SearchBar from '../shared/SearchBar';
 

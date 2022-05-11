@@ -6,11 +6,11 @@ import {
 } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
-import useShareAccess from '../../hooks/mutations/shared_accesses/useShareAccess';
-import Avatar from '../users/Avatar';
-import SearchBar from '../shared/SearchBar';
-import useShareableUsers from '../../hooks/queries/shared_accesses/useShareableUsers';
-import RoomContext from '../../contexts/roomContext';
+import useShareAccess from '../../../hooks/mutations/shared_accesses/useShareAccess';
+import Avatar from '../../users/Avatar';
+import SearchBar from '../../shared/SearchBar';
+import useShareableUsers from '../../../hooks/queries/shared_accesses/useShareableUsers';
+import RoomContext from '../../../contexts/roomContext';
 
 export default function SharedAccessForm({ handleClose }) {
   const { register, handleSubmit } = useForm();

@@ -3,7 +3,7 @@ import { Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import Modal from '../shared/Modal';
-import SharedAccessForm from '../forms/SharedAccessForm';
+import SharedAccessForm from '../forms/shared_access_forms/SharedAccessForm';
 
 export default function SharedAccessEmpty() {
   return (

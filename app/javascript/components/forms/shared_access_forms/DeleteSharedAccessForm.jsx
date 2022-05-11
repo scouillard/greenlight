@@ -6,8 +6,8 @@ import { Button, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import PropTypes from 'prop-types';
-import useDeleteSharedAccess from '../../hooks/mutations/shared_accesses/useDeleteSharedAccess';
-import RoomContext from '../../contexts/roomContext';
+import useDeleteSharedAccess from '../../../hooks/mutations/shared_accesses/useDeleteSharedAccess';
+import RoomContext from '../../../contexts/roomContext';
 
 export default function DeleteSharedAccessForm({ userId }) {
   const { register, handleSubmit } = useForm();

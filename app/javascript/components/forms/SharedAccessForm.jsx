@@ -1,22 +1,20 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Button, Col, Form, Row, Stack,
 } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import useShareAccess from '../../hooks/mutations/shared_accesses/useShareAccess';
 import Avatar from '../users/Avatar';
 import SearchBar from '../shared/SearchBar';
 import useShareableUsers from '../../hooks/queries/shared_accesses/useShareableUsers';
-import useRoom from '../../hooks/queries/rooms/useRoom';
+import RoomContext from '../../contexts/roomContext';
 
 export default function SharedAccessForm({ handleClose }) {
   const { register, handleSubmit } = useForm();
-  const { friendlyId } = useParams();
-  const { data: room } = useRoom(friendlyId);
+  const room = useContext(RoomContext);
   const { onSubmit } = useShareAccess({ roomId: room.id, closeModal: handleClose });
   const { data: users } = useShareableUsers(room.id);
   const [search, setSearch] = useState('');

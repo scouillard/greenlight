@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 export default function SearchBar({ id, setSearch }) {
   return (
@@ -19,3 +20,8 @@ export default function SearchBar({ id, setSearch }) {
     </Form>
   );
 }
+
+SearchBar.propTypes = {
+  id: PropTypes.number.isRequired,
+  setSearch: PropTypes.func.isRequired,
+};

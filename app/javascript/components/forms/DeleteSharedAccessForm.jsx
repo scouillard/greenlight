@@ -1,10 +1,13 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { useParams } from 'react-router-dom';
-import useDeleteSharedAccess from '../../hooks/mutations/rooms/useDeleteSharedAccess';
+import PropTypes from 'prop-types';
+import useDeleteSharedAccess from '../../hooks/mutations/shared_accesses/useDeleteSharedAccess';
 import useRoom from '../../hooks/queries/rooms/useRoom';
 
 export default function DeleteSharedAccessForm({ userId }) {
@@ -22,3 +25,7 @@ export default function DeleteSharedAccessForm({ userId }) {
     </Form>
   );
 }
+
+DeleteSharedAccessForm.propTypes = {
+  userId: PropTypes.number.isRequired,
+};

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   Button, Card, Col, Row, Stack,
 } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import Modal from '../shared/Modal';
 import SharedAccessForm from '../forms/SharedAccessForm';
 import DeleteSharedAccessForm from '../forms/DeleteSharedAccessForm';
@@ -60,3 +61,13 @@ export default function SharedAccessList({ users }) {
     </div>
   );
 }
+
+SharedAccessList.propTypes = {
+  users: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    filter: PropTypes.func,
+  }).isRequired,
+};

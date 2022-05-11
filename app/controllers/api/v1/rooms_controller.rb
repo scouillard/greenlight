@@ -4,7 +4,7 @@ module Api
   module V1
     class RoomsController < ApplicationController
       skip_before_action :verify_authenticity_token # TODO: amir - Revisit this.
-      before_action :find_room, only: %i[show start recordings share_room_access shared_users shareable_users unshare_room_access]
+      before_action :find_room, only: %i[show start recordings]
 
       # GET /api/v1/rooms.json
       # Returns: { data: Array[serializable objects(rooms)] , errors: Array[String] }
@@ -64,70 +64,6 @@ module Api
       def recordings
         render_json(data: @room.recordings, status: :ok, include: :formats)
       end
-
-      # POST /api/v1/rooms/friendly_id/share_room_access
-      def share_room_access
-        shared_users = User.where(id: params[:shared_access_users])
-
-        shared_users.each do |shared_user|
-          SharedAccess.find_or_create_by!(user_id: shared_user.id, room_id: @room.id) if shared_user.room_shareable?(@room)
-        end
-
-        render_json status: :ok
-      end
-
-      # GET /api/v1/rooms/friendly_id/shared_users.json
-      def shared_users
-        shared_users = []
-
-        # User is added to the shared_user list if the room is shared to the user and it is not already included in shared_user
-        User.joins(:shared_rooms).each do |user|
-          shared_users << user if user.room_shared?(@room) && shared_users.exclude?(user)
-        end
-
-        shared_users.map! do |user|
-          {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            avatar: user_avatar(user)
-          }
-        end
-
-        render_json data: shared_users, status: :ok
-      end
-
-      # GET /api/v1/rooms/friendly_id/shareable_users.json
-      def shareable_users
-        shareable_users = []
-
-        # User is added to the shareable_user list unless it's the room owner or the room is already shared to the user
-        User.all.each do |user|
-          shareable_users << user if user.room_shareable?(@room)
-        end
-
-        shareable_users.map! do |user|
-          {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            avatar: user_avatar(user)
-          }
-        end
-
-        render_json data: shareable_users, status: :ok
-      end
-
-      # DELETE /api/v1/rooms/friendly_id/delete_share_room_access.json
-      def unshare_room_access
-        room = Room.find_by(friendly_id: params[:friendly_id])
-        user = User.find_by(id: params[:user_id])
-
-        SharedAccess.find_by!(user_id: user.id, room_id: room.id).delete
-
-        render_json status: :ok
-      end
-
 
       private
 

@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from 'react-query';
 import axios from 'axios';
 
-export default function useShareAccess({ friendlyId, closeModal }) {
+export default function useShareAccess({ roomId, closeModal }) {
   const queryClient = useQueryClient();
 
   const shareAccess = (sharedAccessUsers) => {
-    axios.post(`/api/v1/rooms/${friendlyId}/share_room_access`, sharedAccessUsers);
+    axios.post(`/api/v1/shared_accesses/${roomId}`, sharedAccessUsers);
   };
 
   const delay = (time) => new Promise((resolve) => {

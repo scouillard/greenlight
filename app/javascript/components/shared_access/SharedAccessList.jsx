@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Card, Col, Row, Stack } from 'react-bootstrap';
+import {
+  Button, Card, Col, Row, Stack,
+} from 'react-bootstrap';
 import Modal from '../shared/Modal';
 import SharedAccessForm from '../forms/SharedAccessForm';
 import DeleteSharedAccessForm from '../forms/DeleteSharedAccessForm';

@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { Button, Col, Form, Row, Stack } from 'react-bootstrap';
+import {
+  Button, Col, Form, Row, Stack,
+} from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import useShareAccess from '../../hooks/mutations/rooms/useShareAccess';
 import Avatar from '../users/Avatar';
 import SearchBar from '../shared/SearchBar';
 import useShareableUsers from '../../hooks/queries/rooms/useShareableUsers';
+import useRoom from '../../hooks/queries/rooms/useRoom';
 
 export default function SharedAccessForm({ handleClose }) {
   const { register, handleSubmit } = useForm();
   const { friendlyId } = useParams();
-  const { onSubmit } = useShareAccess({ friendlyId, closeModal: handleClose });
-  const { data: users } = useShareableUsers(friendlyId);
+  const { isLoading, data: room } = useRoom(friendlyId);
+  const { onSubmit } = useShareAccess({ roomId: room.id, closeModal: handleClose });
+  const { data: users } = useShareableUsers(room.id);
   const [search, setSearch] = useState('');
 
   return (
@@ -41,7 +45,7 @@ export default function SharedAccessForm({ handleClose }) {
                     value={user.id}
                     aria-label="tbd"
                     className="pe-3"
-                    {...register('shared_access_users')}
+                    {...register('users')}
                   />
                   <Avatar avatar={user.avatar} radius={40} />
                   <h6 className="text-primary mb-0 ps-3"> { user.name } </h6>

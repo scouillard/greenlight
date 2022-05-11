@@ -8,7 +8,7 @@ export default function SearchBar({ id, setSearch }) {
       <Form.Group>
         <Form.Control
           id={id}
-          className="rounded border"
+          className="search-bar rounded border"
           placeholder="Search"
           type="search"
           onKeyPress={(e) => (

@@ -3,9 +3,8 @@ env:
   DATABASE_URL: postgres://postgres:postgres@localhost/greenlight-actions
   RAILS_ENV: test
 
-name: CI-test
+name: CI
 on:
-  workflow_dispatch:
   pull_request:
     branches: "*"
 
@@ -60,11 +59,13 @@ jobs:
           bundler exec rails db:create
           bundler exec rails db:migrate
 
-      - name: Run Rubocop
-        run: bundle exec rubocop --parallel
+#      - name: Run Rubocop
+#        run: bundle exec rubocop --parallel
 
       - name: Run RSpec
-        run: bundle exec rspec
+        run: |
+          tail -f log/test.log &
+          bundle exec rspec
 
       - name: Run ESLint
         run: npx eslint app/javascript/* --ext .js,.jsx

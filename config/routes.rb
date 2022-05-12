@@ -1,7 +1,38 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root 'components#index', via: :all
 
-  root 'components#index'
+  # All the Api endpoints must be under /api/v1 and must have an extension .json.
+  namespace :api do
+    namespace :v1 do
+      resources :sessions, only: %i[index create] do
+        collection do
+          delete 'signout', to: 'sessions#destroy'
+        end
+      end
+      resources :users, only: %i[index create update destroy] do
+        member do
+          delete :purge_avatar
+        end
+      end
+      resources :rooms, only: %i[show index create destroy], param: :friendly_id do
+        member do
+          post '/start', to: 'rooms#start', as: :start_meeting
+          get '/recordings', to: 'rooms#recordings'
+        end
+      end
+      resources :shared_accesses, only: :destroy, param: :room_id do
+        member do
+          post :create
+          get '/shared_users', to: 'shared_accesses#shared_users'
+          get '/shareable_users', to: 'shared_accesses#shareable_users'
+        end
+      end
+      resources :recordings, only: [:index]
+    end
+  end
+  match '*path', to: 'components#index', via: :all, constraints: lambda { |req|
+    req.path.exclude? 'rails/active_storage'
+  } # Enable CSR for full fledged http requests.
 end

@@ -53,6 +53,7 @@ RSpec.describe Api::V1::SharedAccessesController, type: :controller do
 
   describe '#shared_users' do
     it 'lists the users that the room has been shared to' do
+      puts "\n\n\n\n   HERE IN SHARED USERS \n\n\n\n"
       room = create(:room)
       users = create_list(:user, 10)
       shared_users = []
@@ -69,6 +70,7 @@ RSpec.describe Api::V1::SharedAccessesController, type: :controller do
   end
 
   describe '#shareable_users' do
+    puts "\n\n\n\n   HERE IN SHAREABLE USERS \n\n\n\n"
     it 'lists the users that the room can be shared to' do
       room = create(:room)
       users = create_list(:user, 10)

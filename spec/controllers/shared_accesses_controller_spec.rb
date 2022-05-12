@@ -66,12 +66,13 @@ RSpec.describe Api::V1::SharedAccessesController, type: :controller do
       get :shared_users, params: { room_id: room.id }
       shared_user_response = JSON.parse(response.body)['data'].map { |user| user['id'] }
       expect(shared_user_response).to eql(shared_users.pluck(:id))
+      puts "\n\n\n\n   FINISH SHARE USERS \n\n\n\n"
     end
   end
 
   describe '#shareable_users' do
-    puts "\n\n\n\n   HERE IN SHAREABLE USERS \n\n\n\n"
     it 'lists the users that the room can be shared to' do
+      puts "\n\n\n\n   HERE IN SHAREABLE USERS \n\n\n\n"
       room = create(:room)
       users = create_list(:user, 10)
       shareable_users = []
@@ -87,6 +88,7 @@ RSpec.describe Api::V1::SharedAccessesController, type: :controller do
       get :shareable_users, params: { room_id: room.id }
       shareable_user_response = JSON.parse(response.body)['data'].map { |user| user['id'] }
       expect(shareable_user_response).to eql(shareable_users.pluck(:id))
+      puts "\n\n\n\n   FINISH SHAREABLE USERS \n\n\n\n"
     end
   end
 end

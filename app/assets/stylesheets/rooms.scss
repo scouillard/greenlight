@@ -1,0 +1,29 @@
+.rooms-card {
+  &:hover {
+    background: rgba(26, 69, 74, 0.1)
+  }
+}
+
+.room-card-top {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.tab-content {
+  padding: 0%;
+}
+
+#rooms-search {
+  height: 38px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+#delete-room{
+  color: red;
+  background-color: white;
+  border: none;
+}

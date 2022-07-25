@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'bootstrap/scss/bootstrap';
 
+
 @import 'helpers';
 @import 'rooms';
 @import 'recordings';
@@ -8,6 +9,8 @@
 @import 'shared_accesses';
 @import 'presentation';
 @import 'admin_panel';
+
+
 
 html,
 body {
@@ -23,9 +26,9 @@ body {
   height: 100%;
 }
 
-.btn-primary-light {
+.btn-brand-light {
   border: 2px solid gainsboro !important;
-  color: $primary;
+  color: var(--brand);
   background-color: white;
 
   &:hover {
@@ -67,7 +70,7 @@ input.search-bar {
 .icon-circle {
   width: 100px;
   height: 100px;
-  background-color: $primary-light;
+  background-color: var(--brand-light);
 }
 
 //Heroicons
@@ -104,12 +107,28 @@ input.search-bar {
   border: none;
 }
 
+
 .nav-pills .nav-link.active {
-  color: $primary !important;
-  background-color: $primary-light;
+  color: var(--brand) !important;
+  background-color: var(--brand-light);
   font-weight: 600;
 
   svg {
-    color: $primary !important;
+    color: var(--brand) !important;
   }
+}
+
+.text-brand {
+  color: var(--brand) !important;
+}
+
+.btn-brand {
+  background-color: var(--brand) !important;
+  border-color: var(--brand) !important;
+  color: white;
+}
+
+:root {
+  --brand: '';
+  --brand-light: whitesmoke;
 }

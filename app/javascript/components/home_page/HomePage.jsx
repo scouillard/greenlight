@@ -12,7 +12,7 @@ export default function HomePage() {
     env.OPENID_CONNECT ? (
       <Form action="/auth/openid_connect" method="POST" data-turbo="false">
         <input type="hidden" name="authenticity_token" value={document.querySelector('meta[name="csrf-token"]').content} />
-        <input className="btn btn-primary mx-2" type="submit" value="Sign In" />
+        <input className="btn btn-brand mx-2" type="submit" value="Sign In" />
         <input className="btn btn-outline-primary" type="submit" value="Sign Up" />
       </Form>
 

@@ -173,6 +173,29 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       expect(response).to have_http_status(:forbidden)
     end
 
+
+    context 'AccessCode room configuration are enabled' do
+      let(:fake_room_settings_getter) { instance_double(RoomSettingsGetter) }
+
+      before do
+        allow(RoomSettingsGetter).to receive(:new).and_return(fake_room_settings_getter)
+        allow(fake_room_settings_getter).to receive(:call).and_return(
+          { 'glViewerAccessCode' => true, 'glModeratorAccessCode' => true }
+        )
+      end
+
+      it 'generates the access code when the options are enabled' do
+        room = create(:room)
+        expect(RoomSettingsGetter).to receive(:new).with(room_id: room.id, provider: 'greenlight', current_user: nil, show_codes: false,
+                                                         settings: %w[glViewerAccessCode glModeratorAccessCode])
+        expect(fake_room_settings_getter).to receive(:call)
+
+        meeting_option = create(:meeting_option, name: 'glViewerAccessCode')
+        room_meeting_option = create(:room_meeting_option, room:, meeting_option:)
+        expect(room_meeting_option.value).not_to be('')
+      end
+    end
+
     context 'user with ManageUser permission' do
       before do
         session[:user_id] = user_with_manage_users_permission.id

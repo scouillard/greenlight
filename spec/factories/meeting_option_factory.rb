@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :meeting_option do
     name { Faker::Vehicle.unique.make }
-    default_value { [true, false, '12345'].sample }
+    default_value { [true, false].sample }
   end
 end

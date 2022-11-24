@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+<<<<<<< HEAD
 # BigBlueButton open source conferencing system - http://www.bigbluebutton.org/.
 #
 # Copyright (c) 2018 BigBlueButton Inc. and by respective authors (see below).
@@ -27,6 +28,19 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 require "action_cable/testing/rspec"
+=======
+# This file is copied to spec/ when you run 'rails generate rspec:install'
+require 'spec_helper'
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
+# Prevent database truncation if the environment is production
+abort('The Rails environment is running in production mode!') if Rails.env.production?
+require 'rspec/rails'
+# Add additional requires below this line. Rails is not loaded until this point!
+require 'support/factory_bot'
+require 'support/shoulda_matchers'
+require 'helpers'
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -41,12 +55,25 @@ require "action_cable/testing/rspec"
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
+<<<<<<< HEAD
 Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+=======
+# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+
+# Checks for pending migrations and applies them before tests are run.
+# If you are not using ActiveRecord, you can remove these lines.
+begin
+  ActiveRecord::Migration.maintain_test_schema!
+rescue ActiveRecord::PendingMigrationError => e
+  puts e.to_s.strip
+  exit 1
+end
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -56,6 +83,12 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+<<<<<<< HEAD
+=======
+  # You can uncomment this line to turn off ActiveRecord support entirely.
+  # config.use_active_record = false
+
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
@@ -63,7 +96,11 @@ RSpec.configure do |config|
   # You can disable this behaviour by removing the line below, and instead
   # explicitly tag your specs with their type, e.g.:
   #
+<<<<<<< HEAD
   #     RSpec.describe UsersController, :type => :controller do
+=======
+  #     RSpec.describe UsersController, type: :controller do
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
   #       # ...
   #     end
   #
@@ -77,8 +114,16 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   #
   config.include ActiveSupport::Testing::TimeHelpers
+<<<<<<< HEAD
 end
 
 # A dummy text to ensure testing without 'terms and conditions'.
 # Tests that depends on 'terms and conditions' will set them on example run.
 Rails.configuration.terms = false
+=======
+  config.include ActiveJob::TestHelper
+
+  # Include helper methods in all specs
+  config.include Helpers
+end
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8

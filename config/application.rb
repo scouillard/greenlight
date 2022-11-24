@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+<<<<<<< HEAD
 # BigBlueButton open source conferencing system - http://www.bigbluebutton.org/.
 #
 # Copyright (c) 2018 BigBlueButton Inc. and by respective authors (see below).
@@ -16,6 +17,8 @@
 # You should have received a copy of the GNU Lesser General Public License along
 # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 
+=======
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 require_relative 'boot'
 
 require 'rails/all'
@@ -27,6 +30,7 @@ Bundler.require(*Rails.groups)
 module Greenlight
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+<<<<<<< HEAD
     config.load_defaults 5.2
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -186,5 +190,33 @@ module Greenlight
 
     # Max avatar image size
     config.max_avatar_size = ENV['MAX_AVATAR_SIZE'].to_i.zero? ? 100_000 : ENV['MAX_AVATAR_SIZE'].to_i
+=======
+    config.load_defaults 7.0
+
+    # Configuration for the application, engines, and railties goes here.
+    #
+    # These settings can be overridden in specific environments using the files
+    # in config/environments, which are processed later.
+    #
+    # config.time_zone = "Central Time (US & Canada)"
+    # config.eager_load_paths << Rails.root.join("extras")
+
+    # Custom error messages for the Client side.
+    config.custom_error_msgs = {
+      # TODO: amir - Add I18n.
+      missing_params: 'Invalid or Missing parameters.',
+      record_not_found: 'Record Not Found',
+      server_error: 'Something Went Wrong'
+    }
+
+    ActiveModelSerializers.config.adapter = :json
+
+    config.active_storage.variant_processor = :mini_magick
+
+    config.bigbluebutton_endpoint = ENV.fetch('BIGBLUEBUTTON_ENDPOINT', 'https://test-install.blindsidenetworks.com/bigbluebutton/api')
+    config.bigbluebutton_endpoint = File.join(config.bigbluebutton_endpoint, '/api') unless config.bigbluebutton_endpoint.end_with?('api', 'api/')
+
+    config.bigbluebutton_secret = ENV.fetch('BIGBLUEBUTTON_SECRET', '8cd8ef52e8e101574e400365b55e11a6')
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
   end
 end

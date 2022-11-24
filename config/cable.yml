@@ -5,6 +5,12 @@ test:
   adapter: test
 
 production:
+<<<<<<< HEAD
   adapter: <%= ENV['CABLE_ADAPTER'] || 'postgresql' %>
   url: <%= ENV['REDIS_URL'] %>
   channel_prefix: greenlight_production
+=======
+  adapter: redis
+  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  channel_prefix: greenlight_production
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8

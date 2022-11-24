@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <img width="1012" alt="bbb-greenlight-banner" src="https://user-images.githubusercontent.com/1273169/141143584-684766cf-8633-4d66-b35e-f134a368e4c8.png">
 
 
@@ -38,3 +39,76 @@ We invite you to build upon Greenlight and help make it better. See [Contributin
 We invite your feedback, questions, and suggests about Greenlight too. Please post them to the [Greenlight mailing list](https://groups.google.com/forum/#!forum/bigbluebutton-greenlight).
 
 To help with organization and consistency, we have implemented a Pull Request template that must be used for all Pull Requests. This template helps ensure that the project maintainers can review all PRs in a timely manner. When creating a Pull Request, please provide as much information as possible.
+=======
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+Install Ruby 3.1.0
+
+* System dependencies
+
+```
+bundle install
+```
+
+* Configuration
+
+Initialize environment variables (DATABASE_URL, BIGBLUEBUTTON_SECRET and BIGBLUEBUTTON_ENDPOINT, PORT is optional)
+
+```
+cp dotenv .env
+```
+
+
+* Database creation
+
+```
+rake db:create
+rake db:migrate:with_data
+```
+
+* Database initialization
+
+```
+rake db:seed
+```
+
+* How to run the test suite
+
+```
+./bin/start
+```
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
+
+
+Install Ruby 3.1.0
+
+bundle install
+cp dotenv .env
+
+Set DATABASE_URL, BIGBLUEBUTTON_SECRET and BIGBLUEBUTTON_ENDPOINT
+
+rake db:create
+rake db:migrate:with_data
+
+./bin/start
+
+
+For production
+
+RAILS_ENV=production
+RAILS_SERVE_STATIC_FILES=true
+
+rake assets:precompile
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8

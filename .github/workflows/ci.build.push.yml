@@ -1,5 +1,9 @@
 env:
+<<<<<<< HEAD
   RUBY_VERSION: 2.7
+=======
+  RUBY_VERSION: 3.1
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 
 name: CI Build Push
 on:
@@ -7,6 +11,10 @@ on:
     branches-ignore:
       - v1
       - v2
+<<<<<<< HEAD
+=======
+      - v3
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
       - translations*
 
 jobs:
@@ -67,7 +75,11 @@ jobs:
           push: true
           tags: |
             "${{ steps.ci_docker_repository.outputs.repository }}:${{ steps.ci_branch_name.outputs.branch }}"
+<<<<<<< HEAD
           build-args: "version_code=${{ steps.ci_branch_name.outputs.branch }}-${{ steps.ci_commit_short_sha.outputs.short_sha }}"
+=======
+          build-args: "VERSION_TAG=${{ steps.ci_branch_name.outputs.branch }}-${{ steps.ci_commit_short_sha.outputs.short_sha }}"
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
@@ -76,11 +88,19 @@ jobs:
         if: contains(env.DOCKER_BUILD_ENABLED, 'true') && contains(env.DOCKER_BUILD_ALTERNATE_ENABLED, 'true') && github.ref != 'refs/heads/master'
         uses: docker/build-push-action@v2
         with:
+<<<<<<< HEAD
           file: dockerfiles/v2/alpine
           push: true
           tags: |
             "${{ steps.ci_docker_repository.outputs.repository }}:${{ steps.ci_branch_name.outputs.branch }}-alpine"
           build-args: "VERSION_CODE=${{ steps.ci_branch_name.outputs.branch }}-${{ steps.ci_commit_short_sha.outputs.short_sha }}"
+=======
+          file: dockerfiles/v3/alpine
+          push: true
+          tags: |
+            "${{ steps.ci_docker_repository.outputs.repository }}:${{ steps.ci_branch_name.outputs.branch }}-alpine"
+          build-args: "VERSION_TAG=${{ steps.ci_branch_name.outputs.branch }}-${{ steps.ci_commit_short_sha.outputs.short_sha }}"
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
@@ -89,11 +109,19 @@ jobs:
         if: contains(env.DOCKER_BUILD_ENABLED, 'true') && contains(env.DOCKER_BUILD_ALTERNATE_ENABLED, 'true') && github.ref != 'refs/heads/master'
         uses: docker/build-push-action@v2
         with:
+<<<<<<< HEAD
           file: dockerfiles/v2/amazonlinux
           push: true
           tags: |
             "${{ steps.ci_docker_repository.outputs.repository }}:${{ steps.ci_branch_name.outputs.branch }}-amazonlinux"
           build-args: "VERSION_CODE=${{ steps.ci_branch_name.outputs.branch }}-${{ steps.ci_commit_short_sha.outputs.short_sha }}"
+=======
+          file: dockerfiles/v3/amazonlinux
+          push: true
+          tags: |
+            "${{ steps.ci_docker_repository.outputs.repository }}:${{ steps.ci_branch_name.outputs.branch }}-amazonlinux"
+          build-args: "VERSION_TAG=${{ steps.ci_branch_name.outputs.branch }}-${{ steps.ci_commit_short_sha.outputs.short_sha }}"
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 

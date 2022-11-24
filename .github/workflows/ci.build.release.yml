@@ -1,5 +1,9 @@
 env:
+<<<<<<< HEAD
   RUBY_VERSION: 2.7
+=======
+  RUBY_VERSION: 3.1
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 
 name: CI Build Release
 on:
@@ -73,7 +77,11 @@ jobs:
             "${{ steps.ci_docker_repository.outputs.repository }}:v${{ steps.ci_tag_release_major.outputs.tag }}"
             "${{ steps.ci_docker_repository.outputs.repository }}:v${{ steps.ci_tag_release_minor.outputs.tag }}"
             "${{ steps.ci_docker_repository.outputs.repository }}:latest"
+<<<<<<< HEAD
           build-args: "version_code=release-${{ steps.ci_tag_release_version.outputs.tag }}"
+=======
+          build-args: "VERSION_TAG=release-${{ steps.ci_tag_release_version.outputs.tag }}"
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
@@ -86,7 +94,11 @@ jobs:
           push: true
           tags: |
             "${{ steps.ci_docker_repository.outputs.repository }}:v${{ steps.ci_tag_release_version.outputs.tag }}-alpine"
+<<<<<<< HEAD
           build-args: "VERSION_CODE=release-${{ steps.ci_tag_release_version.outputs.tag }}"
+=======
+          build-args: "VERSION_TAG=release-${{ steps.ci_tag_release_version.outputs.tag }}"
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
@@ -99,7 +111,11 @@ jobs:
           push: true
           tags: |
             "${{ steps.ci_docker_repository.outputs.repository }}:v${{ steps.ci_tag_release_version.outputs.tag }}-amazonlinux"
+<<<<<<< HEAD
           build-args: "VERSION_CODE=release-${{ steps.ci_tag_release_version.outputs.tag }}"
+=======
+          build-args: "VERSION_TAG=release-${{ steps.ci_tag_release_version.outputs.tag }}"
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
@@ -107,4 +123,8 @@ jobs:
         if: contains(env.DOCKER_BUILD_ENABLED, 'true')
         run: |
           rm -rf /tmp/.buildx-cache
+<<<<<<< HEAD
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+=======
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8

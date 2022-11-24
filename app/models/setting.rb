@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+<<<<<<< HEAD
 # BigBlueButton open source conferencing system - http://www.bigbluebutton.org/.
 #
 # Copyright (c) 2018 BigBlueButton Inc. and by respective authors (see below).
@@ -89,4 +90,10 @@ class Setting < ApplicationRecord
       "disabled"
     end
   end
+=======
+class Setting < ApplicationRecord
+  has_many :site_settings, dependent: :restrict_with_exception
+
+  validates :name, presence: true, uniqueness: true
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 end

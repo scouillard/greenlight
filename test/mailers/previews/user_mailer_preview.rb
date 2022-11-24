@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UserMailerPreview < ActionMailer::Preview
+<<<<<<< HEAD
   def initialize(_params)
     super
     @settings = Setting.find_by(provider: "greenlight")
@@ -69,5 +70,21 @@ class UserMailerPreview < ActionMailer::Preview
     logo_image = "https://raw.githubusercontent.com/bigbluebutton/greenlight/master/app/assets/images/logo_with_text.png"
     user_color = "#467fcf"
     UserMailer.user_demoted(user, role, url, logo_image, user_color)
+=======
+  def test_email
+    UserMailer.with(to: 'user@users.com', subject: 'Test Subject').test_email
+  end
+
+  def reset_password_email
+    fake_user = Struct.new(:name, :email)
+
+    UserMailer.with(user: fake_user.new('user', 'user@users.com'), expires_in: 1.hour.from_now, reset_url: 'https://example.com/reset').reset_password_email
+  end
+
+  def activate_account_email
+    fake_user = Struct.new(:name, :email)
+
+    UserMailer.with(user: fake_user.new('user', 'user@users.com'), expires_in: 1.hour.from_now, activation_url: 'https://example.com/activate').activate_account_email
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
   end
 end

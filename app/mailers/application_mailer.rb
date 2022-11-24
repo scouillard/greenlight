@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+<<<<<<< HEAD
 # BigBlueButton open source conferencing system - http://www.bigbluebutton.org/.
 #
 # Copyright (c) 2018 BigBlueButton Inc. and by respective authors (see below).
@@ -18,5 +19,8 @@
 
 class ApplicationMailer < ActionMailer::Base
   default from: 'from@example.com'
+=======
+class ApplicationMailer < ActionMailer::Base
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
   layout 'mailer'
 end

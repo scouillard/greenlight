@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // BigBlueButton open source conferencing system - http://www.bigbluebutton.org/.
 //
 // Copyright (c) 2018 BigBlueButton Inc. and by respective authors (see below).
@@ -17,3 +18,7 @@
 //= link_tree ../images
 //= link_directory ../javascripts .js
 //= link_directory ../stylesheets .css
+=======
+//= link_tree ../images
+//= link_tree ../builds
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8

@@ -1,0 +1,82 @@
+#user-recordings {
+  table {
+    border-top-right-radius: $border-radius-lg;
+    border-top-left-radius: $border-radius-lg;
+    border-spacing: 0;
+    overflow: hidden;
+  }
+
+  tr {
+    border-color: whitesmoke !important;
+    border-right: 0 !important;
+    border-left: 0 !important;
+  }
+
+  tbody {
+    tr {
+      &:last-child:not(.no-recordings-found) {
+        border-bottom: 4px solid whitesmoke !important;
+      }
+    }
+  }
+
+  .dropdown-item {
+    color: $muted;
+    &:hover {
+      color: var(--brand-color);
+    }
+    &:active {
+      background-color: white !important;
+    }
+  }
+
+  .pagination-wrapper {
+    border: 0 !important;
+  }
+
+  .no-recordings-found {
+    border-bottom: 0 !important;
+  }
+}
+
+.recordings-list {
+  .recording-icon-circle {
+    width: 40px;
+    height: 40px;
+    background-color: var(--brand-color-light);
+  }
+
+  .btn-format-presentation {
+    background-color: #f8f5fe;
+    color: #6941c6;
+  }
+  .btn-format-video {
+    background-color: #eff8ff;
+    color: #165dd3;
+  }
+
+  .btn-format-podcast {
+    background-color:#eff5ff;
+    color: #3539cc;
+  }
+
+  .btn-format-statistics {
+    background-color:#eff5ff;
+    color: #3539cc;
+  }
+  .btn-format-notes {
+    background-color: #f3f4f6;
+    color: #344154;
+  }
+}
+
+.visibility-dropdown {
+  width: 125px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.recordings-count-badge {
+  background-color: whitesmoke !important;
+}
+

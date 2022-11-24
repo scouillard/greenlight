@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+<<<<<<< HEAD
 # frozen_string_literal: true
 
 begin
@@ -9,3 +10,8 @@ end
 APP_PATH = File.expand_path('../config/application', __dir__)
 require_relative '../config/boot'
 require 'rails/commands'
+=======
+APP_PATH = File.expand_path("../config/application", __dir__)
+require_relative "../config/boot"
+require "rails/commands"
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8

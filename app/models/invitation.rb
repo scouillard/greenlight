@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+<<<<<<< HEAD
 # BigBlueButton open source conferencing system - http://www.bigbluebutton.org/.
 #
 # Copyright (c) 2018 BigBlueButton Inc. and by respective authors (see below).
@@ -28,5 +29,20 @@ class Invitation < ApplicationRecord
 
     search_param = "%#{sanitize_sql_like(string)}%"
     where(search_query, search: search_param)
+=======
+class Invitation < ApplicationRecord
+  INVITATION_VALIDITY_PERIOD = 48.hours
+
+  has_secure_token :token
+
+  validates :email, presence: true, uniqueness: { scope: :provider }
+  validates :provider, presence: true
+  validates :token, uniqueness: true
+
+  def self.search(input)
+    return where('email ILIKE ?', "%#{input}%") if input
+
+    all
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
   end
 end

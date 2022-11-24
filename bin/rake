@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+<<<<<<< HEAD
 # frozen_string_literal: true
 
 begin
@@ -8,4 +9,8 @@ rescue LoadError => e
 end
 require_relative '../config/boot'
 require 'rake'
+=======
+require_relative "../config/boot"
+require "rake"
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 Rake.application.run

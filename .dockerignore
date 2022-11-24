@@ -6,7 +6,11 @@ SECURITY.md
 .github
 
 # Rails
+<<<<<<< HEAD
 .env
+=======
+.env*
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 *.rbc
 capybara-*.html
 .rspec
@@ -26,4 +30,8 @@ Dockerfile
 .gitlab-ci.yml
 .rubocop.yml
 spec
+<<<<<<< HEAD
 test
+=======
+test
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8

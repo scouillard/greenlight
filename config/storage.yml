@@ -6,6 +6,7 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+<<<<<<< HEAD
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 amazon:
   service: S3
@@ -13,6 +14,15 @@ amazon:
   secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
   region: <%= ENV['AWS_REGION'] %>
   bucket: <%= ENV['AWS_BUCKET'] %>
+=======
+# Simple Storage Service (S3)
+amazon:
+  service: S3
+  access_key_id: <%= ENV['S3_ACCESS_KEY_ID'] %>
+  secret_access_key: <%= ENV['S3_SECRET_ACCESS_KEY'] %>
+  region: <%= ENV['S3_REGION'] %>
+  bucket: <%= ENV['S3_BUCKET'] %>
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 s3:
   service: S3
   endpoint: <%= ENV['S3_ENDPOINT'] %>
@@ -22,6 +32,7 @@ s3:
   bucket: <%= ENV['S3_BUCKET'] %>
 
 # Remember not to checkin your GCS keyfile to a repository
+<<<<<<< HEAD
 google:
   service: GCS
   project: "<%= ENV['GCS_PROJECT'] %>"
@@ -39,11 +50,24 @@ google:
     client_x509_cert_url: "<%= ENV['GCS_CLIENT_CERT'] %>"
 
 # Use rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
+=======
+# google:
+#   service: GCS
+#   project: your_project
+#   credentials: <%= Rails.root.join("path/to/gcs.keyfile") %>
+#   bucket: your_own_bucket-<%= Rails.env %>
+
+# Use bin/rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 # microsoft:
 #   service: AzureStorage
 #   storage_account_name: your_account_name
 #   storage_access_key: <%= Rails.application.credentials.dig(:azure_storage, :storage_access_key) %>
+<<<<<<< HEAD
 #   container: your_container_name
+=======
+#   container: your_container_name-<%= Rails.env %>
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 
 # mirror:
 #   service: Mirror

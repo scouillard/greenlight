@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 AllCops:
   Exclude:
   - 'db/schema.rb'
@@ -14,10 +15,30 @@ Style/BlockDelimiters:
 Style/StringLiterals:
   Enabled: false
 
+=======
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/schema.rb'
+    - 'db/data_schema.rb'
+    - 'vendor/**/*'
+    - 'vendor/bundle/**/*'
+    - 'config/routes.rb'
+  DisabledByDefault: false
+  TargetRubyVersion: 3.1
+  NewCops: enable
+
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 # Document classes and non-namespace modules.
 Style/Documentation:
   Enabled: false
 
+<<<<<<< HEAD
 # Check for conditionals that can be replaced with guard clauses
 Style/GuardClause:
   Enabled: false
@@ -120,19 +141,64 @@ Metrics/ClassLength:
 # Limit lines to 80 characters.
 Layout/LineLength:
   Max: 130
+=======
+RSpec/ContextWording:
+  Enabled: false
+
+# Enable having multiple expectations per example in a spec.
+RSpec/MultipleExpectations:
+  Enabled: false
+
+# Enable having long examples
+RSpec/ExampleLength:
+  Enabled: false
+
+# Enable having arbitrary Spec path i.e. Api::V1::Controller.
+RSpec/FilePath:
+  Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/MessageSpies:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 7
+
+# Enable having lines with up to 150 charachters in length.
+Layout/LineLength:
+  Max: 150
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 
 # Avoid methods longer than 10 lines of code.
 Metrics/MethodLength:
   Enabled: false
 
+<<<<<<< HEAD
 Metrics/ModuleLength:
   Enabled: false
+=======
+# Avoid long blocks with many lines.
+Metrics/BlockLength:
+  IgnoredMethods: [ 'describe', 'context', 'xdescribe', 'xcontext', 'FactoryBot.define' ]
+  Exclude:
+    - 'config/routes.rb'
+  Max: 70
+
+Metrics/ClassLength:
+  Max: 150
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 
 # A calculated magnitude based on number of assignments,
 # branches, and conditions.
 Metrics/AbcSize:
   Max: 65
 
+<<<<<<< HEAD
 # A complexity metric that is strongly correlated to the number
 # of test cases needed to validate a method.
 Metrics/CyclomaticComplexity:
@@ -189,3 +255,17 @@ Lint/EmptyBlock:
 
 Style/HashLikeCase:
   Enabled: false
+=======
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+
+RSpec/AnyInstance:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Max: 13
+
+Metrics/PerceivedComplexity:
+  Max: 13
+
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+<<<<<<< HEAD
 # BigBlueButton open source conferencing system - http://www.bigbluebutton.org/.
 #
 # Copyright (c) 2018 BigBlueButton Inc. and by respective authors (see below).
@@ -106,11 +107,49 @@ class Role < ApplicationRecord
       value == "true"
     else
       value
+=======
+class Role < ApplicationRecord
+  has_many :users, dependent: :restrict_with_exception
+  has_many :role_permissions, dependent: :destroy
+  has_many :permissions, through: :role_permissions
+
+  validates :name, presence: true, uniqueness: { scope: :provider }
+  validates :provider, presence: true
+
+  before_validation :set_random_color, on: :create
+
+  after_create :create_role_permissions
+
+  scope :with_provider, ->(current_provider) { where(provider: current_provider) }
+
+  def self.search(input)
+    return where('name ILIKE ?', "%#{input}%") if input
+
+    all
+  end
+
+  # Populate the Role Permissions with default values on Role creation.
+  # The created Role has the same permissions as the 'User' role
+  def create_role_permissions
+    return if %w[Administrator User Guest].include? name # skip creation for default roles
+
+    Permission.all.find_each do |permission|
+      value = case permission.name
+              when 'CreateRoom', 'SharedList', 'CanRecord'
+                'true'
+              when 'RoomLimit'
+                '100'
+              else
+                'false'
+              end
+      RolePermission.create(role: self, permission:, value:)
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
     end
   end
 
   private
 
+<<<<<<< HEAD
   def default_value(name)
     case name
     when "can_appear_in_share_list"
@@ -118,5 +157,9 @@ class Role < ApplicationRecord
     else
       "false"
     end
+=======
+  def set_random_color
+    self.color = "##{SecureRandom.hex(3)}"
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
   end
 end

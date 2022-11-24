@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%
 # BigBlueButton open source conferencing system - http://www.bigbluebutton.org/.
 # Copyright (c) 2018 BigBlueButton Inc. and by respective authors (see below).
@@ -89,5 +90,21 @@
     </div>
 
     <%= render "shared/footer" %>
+=======
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Greenlight</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "main", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body>
+    <%= yield %>
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
   </body>
 </html>

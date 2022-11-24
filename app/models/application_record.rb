@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+<<<<<<< HEAD
 # BigBlueButton open source conferencing system - http://www.bigbluebutton.org/.
 #
 # Copyright (c) 2018 BigBlueButton Inc. and by respective authors (see below).
@@ -22,4 +23,9 @@ class ApplicationRecord < ActiveRecord::Base
   def to_param
     uid
   end
+=======
+class ApplicationRecord < ActiveRecord::Base
+  primary_abstract_class
+  self.implicit_order_column = 'created_at'
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
 end

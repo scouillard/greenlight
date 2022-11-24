@@ -1,9 +1,22 @@
+<<<<<<< HEAD
 default: &default
   pool: 5
+=======
+# SQLite. Versions 3.8.0 and up are supported.
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem "sqlite3"
+#
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8
   timeout: 5000
 
 development:
   <<: *default
+<<<<<<< HEAD
   adapter: sqlite3
   database: db/development.sqlite3
 
@@ -24,3 +37,17 @@ production:
   pool: <%= ENV['DB_POOL_SIZE'] || '9' %>
   connect_timeout: <%= ENV['DB_CONNECT_TIMEOUT'] || '5' %>
   read_timeout: <%= ENV['DB_READ_TIMEOUT'] || '120' %>
+=======
+  database: greenlight-v3-development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: greenlight-v3-test
+
+production:
+  <<: *default
+  database: greenlight-v3-production
+>>>>>>> 5a3eb37130dbeeddf333366e83bfc929424877c8

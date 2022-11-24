@@ -11,7 +11,7 @@ export default function AuthenticatedOnly() {
 
   if (!currentUser.signed_in) {
     toast.error(t('toast.error.signin_required'));
-    return <Navigate to="/" />;
+    return <Navigate to="/signin" />;
   }
 
   if (!currentUser.verified) {
